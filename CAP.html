@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Action Platform</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-green': '#10b981', // Emerald 500
+                        'secondary-blue': '#3b82f6', // Blue 500
+                        'dark-bg': '#1f2937', // Gray 800
+                        'light-bg': '#f9fafb', // Gray 50
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        .card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        /* Custom scrollbar for better appearance */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #9ca3af; /* Gray 400 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #f3f4f6; /* Gray 100 */
+        }
+    </style>
+</head>
+<body class="bg-light-bg min-h-screen font-sans">
+
+    <!-- Message Container (for custom alerts) -->
+    <div id="message-container"></div>
+
+    <!-- Header -->
+    <header class="bg-dark-bg text-white p-4 shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-primary-green" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                Climate Action Platform (CAP)
+            </h1>
+            <nav class="hidden md:flex space-x-4">
+                <a href="#deployment" class="hover:text-primary-green transition duration-150">Deployment</a>
+                <a href="#tracking" class="hover:text-primary-green transition duration-150">Tracking</a>
+                <a href="#about" class="hover:text-primary-green transition duration-150">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- Introduction/Problem Statement -->
+        <section id="overview" class="mb-10 p-6 bg-white rounded-xl card border-t-4 border-secondary-blue">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-3">Bridging the Gap: Digital Climate Mitigation</h2>
+            <p class="text-gray-600 mb-4">
+                The core challenge is creating **scalable, digital, and automation-driven platforms** to meet ambitious national renewable energy targets (Goal 1) and enable transparent, real-time carbon tracking (Goal 2). This platform bridges the national-to-local implementation gap (Goal 3).
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <div class="p-3 bg-secondary-blue/10 rounded-lg">
+                    <p class="text-xl font-bold text-secondary-blue">1. Accelerate RE Deployment</p>
+                </div>
+                <div class="p-3 bg-secondary-blue/10 rounded-lg">
+                    <p class="text-xl font-bold text-secondary-blue">2. Enable Real-time Tracking</p>
+                </div>
+                <div class="p-3 bg-secondary-blue/10 rounded-lg">
+                    <p class="text-xl font-bold text-secondary-blue">3. Bridge Implementation Gap</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 1: Accelerate Deployment - Project Simulator (Static) -->
+        <section id="deployment" class="mb-10">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 border-b pb-2">1. Renewable Energy Deployment Simulator</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Input Card -->
+                <div class="lg:col-span-1 p-6 bg-white rounded-xl card">
+                    <h3 class="text-xl font-bold text-gray-700 mb-4">Simulate Project Viability</h3>
+                    <label for="project-type" class="block text-sm font-medium text-gray-700 mb-1">Project Type:</label>
+                    <select id="project-type" class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-green focus:border-primary-green mb-3">
+                        <option value="solar">Community Solar Farm (Decentralized)</option>
+                        <option value="wind">Onshore Wind Turbine</option>
+                        <option value="microgrid">Rural Microgrid</option>
+                    </select>
+
+                    <label for="capacity" class="block text-sm font-medium text-gray-700 mb-1">Capacity (kW):</label>
+                    <input type="number" id="capacity" value="500" min="10" class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-green focus:border-primary-green mb-3">
+
+                    <label for="investment" class="block text-sm font-medium text-gray-700 mb-1">Upfront Investment (Lakh INR):</label>
+                    <input type="number" id="investment" value="200" min="10" class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-green focus:border-primary-green mb-4">
+
+                    <button id="simulate-button" onclick="simulateProject()" class="w-full bg-primary-green text-white font-semibold py-2 rounded-lg hover:bg-green-600 transition duration-150">
+                        Run Simulation
+                    </button>
+                </div>
+
+                <!-- Output Card -->
+                <div class="lg:col-span-2 p-6 bg-white rounded-xl card border-l-4 border-primary-green">
+                    <h3 class="text-xl font-bold text-gray-700 mb-4">Viability & Impact Report</h3>
+                    <div id="simulation-output" class="text-gray-600 space-y-3">
+                        <p class="text-sm text-gray-500 italic">Enter parameters and run the simulation to see estimated impact.</p>
+
+                        <div id="results-placeholder" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-3 bg-light-bg rounded-lg border">
+                                <p class="text-sm font-medium text-gray-500">Estimated Annual Generation</p>
+                                <p class="text-2xl font-bold text-secondary-blue"><span id="gen-output">0</span> MWh</p>
+                            </div>
+                            <div class="p-3 bg-light-bg rounded-lg border">
+                                <p class="text-sm font-medium text-gray-500">Annual CO2 Avoided</p>
+                                <p class="text-2xl font-bold text-primary-green"><span id="co2-avoided">0</span> Tonnes</p>
+                            </div>
+                            <!-- STATIC STATUS -->
+                            <div class="p-3 bg-light-bg rounded-lg border sm:col-span-2">
+                                <p class="text-sm font-medium text-gray-500">Project Status (Static Guidance)</p>
+                                <!-- Loading Spinner removed -->
+                                <p class="text-base font-semibold text-gray-700 whitespace-pre-wrap" id="status-text">Run simulation for initial viability assessment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Feature 2: Carbon Tracking - Real-time Reporting (with Log) -->
+        <section id="tracking" class="mb-10">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 border-b pb-2">2. Real-Time Carbon Metrics Tracking</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Data Input Card (For Small Businesses/Local Govt) -->
+                <div class="lg:col-span-1 p-6 bg-white rounded-xl card">
+                    <h3 class="text-xl font-bold text-gray-700 mb-4">Report Monthly Emissions</h3>
+
+                    <label for="scope-1" class="block text-sm font-medium text-gray-700 mb-1">Scope 1 (Direct - kg CO2e):</label>
+                    <input type="number" id="scope-1" value="1200" min="0" class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-green focus:border-primary-green mb-3">
+
+                    <label for="scope-2" class="block text-sm font-medium text-gray-700 mb-1">Scope 2 (Energy - kg CO2e):</label>
+                    <input type="number" id="scope-2" value="2500" min="0" class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-green focus:border-primary-green mb-3">
+
+                    <label for="entity-type" class="block text-sm font-medium text-gray-700 mb-1">Entity:</label>
+                    <select id="entity-type" class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-green focus:border-primary-green mb-4">
+                        <option value="Small Business">Small Business</option>
+                        <option value="Local Municipality">Local Municipality</option>
+                        <option value="School/Institution">School/Institution</option>
+                    </select>
+
+                    <button onclick="submitEmissions()" class="w-full bg-secondary-blue text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition duration-150">
+                        Submit Data
+                    </button>
+                </div>
+
+                <!-- Dashboard Visualization -->
+                <div class="lg:col-span-2 p-6 bg-white rounded-xl card border-l-4 border-secondary-blue">
+                    <h3 class="text-xl font-bold text-gray-700 mb-4">Local Emissions Dashboard</h3>
+                    <div id="emission-output" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-3 bg-primary-green/20 rounded-lg border border-primary-green">
+                                <p class="text-sm font-medium text-gray-500">Total Monthly (kg CO2e)</p>
+                                <p class="text-2xl font-bold text-primary-green"><span id="total-emissions">3700</span></p>
+                            </div>
+                            <div class="p-3 bg-primary-green/20 rounded-lg border border-primary-green">
+                                <p class="text-sm font-medium text-gray-500">Tracking Status</p>
+                                <p class="text-2xl font-bold text-primary-green">Digital Tracking (Real-Time)</p>
+                            </div>
+                            <div class="p-3 bg-green-100 rounded-lg border border-green-300">
+                                <p class="text-sm font-medium text-gray-500">Mitigation Target</p>
+                                <p class="text-2xl font-bold text-green-600">10% Reduction (FY 2025)</p>
+                            </div>
+                        </div>
+
+                        <div id="submission-message" class="hidden p-4 bg-primary-green/20 text-primary-green border border-primary-green rounded-lg">
+                            <p class="font-medium">Data Submitted Successfully! Your data is now digitally tracked, contributing to transparent, real-time climate action.</p>
+                        </div>
+                        
+                        <h4 class="text-lg font-semibold text-gray-700 mt-6 mb-3">Submission History</h4>
+                        <div id="emissions-log-container" class="space-y-2 max-h-48 overflow-y-auto p-2 bg-gray-50 rounded-lg border border-gray-200">
+                            <!-- Initial Log Item -->
+                            <div class="flex justify-between items-center text-sm p-2 bg-white rounded-md shadow-sm border-l-4 border-secondary-blue">
+                                <span class="font-medium text-gray-700">Initial Data (Small Business)</span>
+                                <span class="text-secondary-blue font-semibold">3700 kg CO2e</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section - Bridging the Gap -->
+        <section id="about" class="mb-10 p-6 bg-white rounded-xl card border-t-4 border-primary-green">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-3">3. Bridging National Targets to Local Implementation</h2>
+            <p class="text-gray-600">
+                The platform ensures that national policies are actionable at the local level by providing context-specific tools and financial guidance. Automation simplifies compliance, allowing small businesses and local governments to participate meaningfully in India's carbon neutrality mission.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-200 text-gray-600 p-4 mt-8">
+        <div class="max-w-7xl mx-auto text-center text-sm">
+            Conceptual Digital Platform based on "Renewable Energy Adoption and Carbon Emission Reduction" Problem Statement.
+        </div>
+    </footer>
+
+    <script>
+        // Global state for emissions tracking (in-memory for this single-file app)
+        let emissionsHistory = [{ type: 'Small Business', total: 3700, date: new Date().toLocaleDateString() }];
+        
+        // Utility function to display a custom message box instead of alert()
+        function showMessage(title, message, type = 'info') {
+            const container = document.getElementById('message-container');
+            if (!container) return;
+
+            // Define colors based on type
+            let bgColor = 'bg-primary-green/80';
+            let icon = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>';
+
+            if (type === 'error') {
+                bgColor = 'bg-red-500';
+                icon = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>';
+            }
+
+            const messageHtml = `
+                <div class="fixed top-4 right-4 p-4 ${bgColor} text-white rounded-lg shadow-xl max-w-sm z-50 transition-opacity duration-300" role="alert">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 mr-2">${icon}</div>
+                        <p class="font-bold">${title}</p>
+                    </div>
+                    <p class="mt-1 text-sm">${message}</p>
+                </div>
+            `;
+
+            container.innerHTML = messageHtml;
+            setTimeout(() => {
+                container.innerHTML = ''; // Clear the message after 5 seconds
+            }, 5000);
+        }
+
+        // --- Feature 1: Project Simulation Logic (Static) ---
+        function simulateProject() {
+            const statusTextElement = document.getElementById('status-text');
+            const simulateButton = document.getElementById('simulate-button');
+            
+            const type = document.getElementById('project-type').value;
+            const capacity = parseFloat(document.getElementById('capacity').value);
+            const investment = parseFloat(document.getElementById('investment').value);
+
+            if (isNaN(capacity) || isNaN(investment) || capacity <= 0 || investment <= 0) {
+                showMessage('Input Error', 'Please enter valid positive values for Capacity and Investment.', 'error');
+                return;
+            }
+
+            // Disable button
+            simulateButton.disabled = true;
+            simulateButton.textContent = 'Calculating...';
+            statusTextElement.textContent = 'Calculating physical and environmental impact...';
+
+
+            // --- Core Simulation Logic (Client-side) ---
+            const capacityFactor = type === 'solar' ? 0.18 : (type === 'wind' ? 0.25 : 0.40);
+            const emissionFactor = 0.82; // kg CO2e per kWh for grid electricity (India's average)
+            const annualGenerationKWh = capacity * 8760 * capacityFactor;
+            const annualGenerationMWh = (annualGenerationKWh / 1000).toFixed(0);
+            const co2AvoidedTonnes = (annualGenerationKWh * emissionFactor / 1000).toFixed(0);
+
+            // Update DOM for deterministic outputs
+            document.getElementById('gen-output').textContent = annualGenerationMWh;
+            document.getElementById('co2-avoided').textContent = co2AvoidedTonnes;
+            document.getElementById('results-placeholder').classList.remove('hidden');
+
+            // --- Static Policy Guidance (Non-LLM) ---
+            let staticGuidance = '';
+            if (type === 'solar') {
+                staticGuidance = `Community Solar Projects are viable. Focus on decentralized incentive schemes and securing rooftop/land permits. Small-scale projects are less exposed to large PPA risks.`;
+            } else if (type === 'wind') {
+                staticGuidance = `Onshore Wind requires higher initial surveys. Ensure land acquisition and transportation logistics are secure. Capital subsidies may be available based on regional wind energy zones.`;
+            } else if (type === 'microgrid') {
+                staticGuidance = `Rural Microgrids receive priority. Seek funding under rural electrification programs. Grid connection is the main challenge; ensure proper protection relay systems are designed.`;
+            } else {
+                staticGuidance = 'Simulation complete. Basic viability metrics calculated.';
+            }
+
+            statusTextElement.textContent = staticGuidance;
+            showMessage('Simulation Complete', `Estimated generation: ${annualGenerationMWh} MWh/year. Static analysis provided.`, 'info');
+
+            // Re-enable button
+            simulateButton.disabled = false;
+            simulateButton.textContent = 'Run Simulation';
+        }
+
+        // --- Feature 2: Emissions Submission Logic (with Log Update) ---
+        function updateEmissionsLog() {
+            const logContainer = document.getElementById('emissions-log-container');
+            logContainer.innerHTML = ''; // Clear existing log
+
+            // Iterate through history in reverse to show newest first
+            if (emissionsHistory.length === 0) {
+                logContainer.innerHTML = '<p class="text-sm text-gray-500 italic p-2">No submissions yet. Submit data above to start tracking.</p>';
+                return;
+            }
+
+            emissionsHistory.slice().reverse().forEach((entry, index) => {
+                const dateString = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + ' (' + entry.date + ')';
+                const logItem = `
+                    <div class="flex justify-between items-center text-sm p-2 bg-white rounded-md shadow-sm border-l-4 ${index === 0 ? 'border-primary-green' : 'border-gray-300'}">
+                        <span class="font-medium text-gray-700">${entry.type} - ${dateString}</span>
+                        <span class="${index === 0 ? 'text-primary-green' : 'text-secondary-blue'} font-semibold">${entry.total.toFixed(0)} kg CO2e</span>
+                    </div>
+                `;
+                logContainer.innerHTML += logItem;
+            });
+        }
+        
+        function submitEmissions() {
+            const scope1 = parseFloat(document.getElementById('scope-1').value);
+            const scope2 = parseFloat(document.getElementById('scope-2').value);
+            const entityType = document.getElementById('entity-type').value;
+
+            if (isNaN(scope1) || isNaN(scope2) || scope1 < 0 || scope2 < 0) {
+                showMessage('Input Error', 'Please enter valid non-negative values for Scope 1 and Scope 2 emissions.', 'error');
+                return;
+            }
+
+            const total = scope1 + scope2;
+            document.getElementById('total-emissions').textContent = total.toFixed(0);
+
+            // 1. Update overall dashboard status UI
+            const statusCard = document.querySelector('#tracking .p-3:nth-child(2)');
+            statusCard.classList.remove('bg-red-100', 'border-red-300', 'bg-yellow-100', 'border-yellow-300');
+            statusCard.classList.add('bg-primary-green/20', 'border-primary-green');
+            statusCard.querySelector('.text-2xl').textContent = 'Digital Tracking (Real-Time)';
+            statusCard.querySelector('.text-2xl').classList.remove('text-yellow-600', 'text-red-600');
+            statusCard.querySelector('.text-2xl').classList.add('text-primary-green');
+
+            // 2. Log the submission
+            emissionsHistory.push({ 
+                type: entityType, 
+                total: total, 
+                date: new Date().toLocaleDateString()
+            });
+
+            // 3. Update the visual log
+            updateEmissionsLog();
+
+            // 4. Show confirmation message
+            document.getElementById('submission-message').classList.remove('hidden');
+
+            showMessage('Data Recorded', `Total emissions (${entityType}): ${total.toFixed(0)} kg CO2e. Data is now digitally tracked!`, 'info');
+        }
+
+        // Initial setup for the dashboard upon load
+        window.onload = function() {
+            // Initial call to submitEmissions to populate the dashboard with default values
+            updateEmissionsLog(); // Initialize log with default item
+            submitEmissions(); 
+        };
+        
+    </script>
+</body>
+</html>
